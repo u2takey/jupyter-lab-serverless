@@ -3,9 +3,32 @@ from sqlalchemy import Column, Integer, String, Float, TEXT
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import time
+import logging
 
 
 Base = declarative_base()
+
+
+class FunctionFront:
+    def __init__(self, **entries):
+        self.__dict__.update(entries)
+
+    def __repr__(self):
+        return "<Function(name='%s', created='%s', updated='%s')>" % (
+            self.name, self.created, self.updated)
+
+    def __call__(self, *args, **kwargs):
+        import imp
+        module = imp.new_module(self.name)
+        exec(self.script, module.__dict__)
+        module.handle.logger = self.logger
+        return module.handle(*args, **kwargs)
+
+    def get_schedule(self):
+        import imp
+        module = imp.new_module(self.name)
+        exec(self.script, module.__dict__)
+        return module.handle.__dict__.get('schedule', None)
 
 
 class Function(Base):
@@ -20,6 +43,7 @@ class Function(Base):
     fail = Column(Integer)
     created = Column(Integer)
     updated = Column(Integer)
+    logger = logging.getLogger()
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -32,14 +56,27 @@ class Function(Base):
         import imp
         module = imp.new_module(self.name)
         exec(self.script, module.__dict__)
+        module.handle.logger = self.logger
         return module.handle(*args, **kwargs)
+
+    def get_schedule(self):
+        import imp
+        module = imp.new_module(self.name)
+        exec(self.script, module.__dict__)
+        return module.handle.__dict__.get('schedule', None)
+
+    def front(self):
+        return FunctionFront(**self.as_dict())
+
 
 class Singleton(type):
     _instances = {}
+
     def __call__(cls, *args, **kwargs):
         if cls not in cls._instances:
             cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
         return cls._instances[cls]
+
 
 class FunctionDB(metaclass=Singleton):
 

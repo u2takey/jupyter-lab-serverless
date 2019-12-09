@@ -1,5 +1,5 @@
 """
-Setup module for the jupyterlab-latex
+Setup module for the jupyter-lab-serverless
 """
 import setuptools
 from setupbase import (
@@ -15,7 +15,7 @@ data_files_spec = [(
 cmdclass = create_cmdclass(data_files_spec=data_files_spec)
 
 setup_dict = dict(
-    name='jupyter-lab-serverlesss',
+    name='jupyter-lab-serverless',
     version=get_version("jupyter-lab-serverless/_version.py"),
     description='Build And Run Serverless Functions in Jupyter Lab.',
     packages=find_packages(),
