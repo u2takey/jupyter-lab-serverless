@@ -1,0 +1,66 @@
+openapi: 3.0.0
+info:
+  title: JupyterLab Severless Extension API
+  description: Handles requests from JupyterLab to manager functions in JupyterLab.
+  version: 1.0.0
+  
+paths:
+  /function:
+    get:
+      summary: List all functions.
+      responses:
+        '200':
+          description: The function was successfully queried.
+  /function/{path}:
+    get:
+      summary: Get a function.
+      parameters:
+        - name: path
+          in: path
+          required: true
+          description: function path/name
+          schema:
+            type: string
+            format: uri
+      responses:
+        '200':
+          description: The function was successfully queried.
+    post:
+      summary: Trigger a function.
+      parameters:
+        - name: path
+          in: path
+          required: true
+          description: function path/name
+          schema:
+            type: string
+            format: uri
+      responses:
+        '200':
+          description: The function was successfully triggerd.
+    put:
+      summary: Add/Replace a function.
+      parameters:
+        - name: path
+          in: path
+          required: true
+          description: function path/name
+          schema:
+            type: string
+            format: uri
+      responses:
+        '200':
+          description: The function was successfully added/replaced.
+    delete:
+      summary: Delete a function by path
+      parameters:
+        - name: path
+          in: path
+          required: true
+          description: function path/name
+          schema:
+            type: string
+            format: uri
+      responses:
+        '200':
+          description: The function was successfully deleted.

@@ -1,0 +1,51 @@
+{
+  "name": "@jupyterlab/jupyter-lab-serverless",
+  "version": "0.1.0",
+  "description": "Create And Run Serverless Function in JupyterLab",
+  "keywords": [
+    "jupyter",
+    "jupyterlab",
+    "jupyterlab-extension"
+  ],
+  "homepage": "https://github.com/u2takey/jupyter-lab-serverless",
+  "bugs": {
+    "url": "https://github.com/u2takey/jupyter-lab-serverless/issues"
+  },
+  "license": "BSD-3-Clause",
+  "author": "u2takey",
+  "files": [
+    "lib/**/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}",
+    "style/**/*.{css,eot,gif,html,jpg,json,png,svg,woff2,ttf}"
+  ],
+  "directories": {
+    "lib": "lib/"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "style": "style/index.css",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/u2takey/jupyter-lab-serverless.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib && rimraf tsconfig.tsbuildinfo",
+    "prepare": "npm run clean && npm run build",
+    "watch": "tsc -w"
+  },
+  "dependencies": {
+    "@jupyterlab/application": "^1.2.1",
+    "@jupyterlab/apputils": "^1.2.1",
+    "@jupyterlab/notebook": "^1.2.2"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.1",
+    "typescript": "~3.5.2"
+  },
+  "sideEffects": [
+    "style/*.css"
+  ],
+  "jupyterlab": {
+    "extension": true
+  }
+}

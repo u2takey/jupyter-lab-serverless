@@ -1,0 +1,10 @@
+{
+  "jupyter.lab.setting-icon-class": "jp-FileIcon",
+  "jupyter.lab.setting-icon-label": "SeverLess",
+  "title": "SeverLess",
+  "description": "SeverLess settings.",
+  "properties": {
+  },
+  "additionalProperties": false,
+  "type": "object"
+}
