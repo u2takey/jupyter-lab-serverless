@@ -20,18 +20,18 @@ RUN pip --no-cache-dir install \
       jupyter-lab-serverless \
       jupyterlab_code_formatter \
       jupyterlab-snippets \
-      sqlalchemy
+      sqlalchemy \
+      requests
 
 RUN jupyter labextension install \
     @jupyter-widgets/jupyterlab-manager \
-    @u2takey/jupyter-lab-serverless \
     @jupyterlab/toc \
     @krassowski/jupyterlab_go_to_definition \
     @ryantam626/jupyterlab_code_formatter
 
-ARG CACHEBUST=1 
-RUN pip --no-cache-dir install --upgrade jupyter-lab-serverless \
-    requests
+ARG CACHEBUST=1
+RUN pip --no-cache-dir install --upgrade jupyter-lab-serverless
+RUN jupyter labextension install @u2takey/jupyter-lab-serverless
 
 EXPOSE 8888
 WORKDIR /opt/app/data

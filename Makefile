@@ -32,6 +32,9 @@ module:
 upload:
 	twine upload --skip-existing -u x -p x  dist/*
 
+publish:
+    npm publish --access=public
+
 .PHONY: clean
 clean:
 	rm -rf ./build ./dist ./*.egg-info \

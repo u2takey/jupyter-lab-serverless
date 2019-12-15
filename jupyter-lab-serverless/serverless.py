@@ -1,7 +1,6 @@
 import json
 from tornado import gen, web
 from notebook.base.handlers import APIHandler
-from .db import FunctionDB
 from nbconvert import ScriptExporter
 import nbformat
 import urllib.parse
