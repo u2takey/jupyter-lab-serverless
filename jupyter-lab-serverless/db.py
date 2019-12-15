@@ -115,7 +115,7 @@ class FunctionDB(metaclass=Singleton):
         self.session().commit()
 
     def del_function(self, name):
-        function = self.session().query_function(name)
+        function = self.query_function(name)
         if function:
             self.session().delete(function)
             self.session().commit()

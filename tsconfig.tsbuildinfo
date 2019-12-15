@@ -598,8 +598,8 @@
         "signature": "e513cc3eb943d0cdee9183fe1cb819568c5434e59257d4233e46a838a08a1078"
       },
       "/users/leiwang/work/go-librarys/src/github.com/u2takey/jupyter-lab-serverless/src/dialog.tsx": {
-        "version": "036a59d2beaa9e40ccfe2c22195417e9e91efaa19113c261e279331d9ff882dc",
-        "signature": "564c00eadf416bd8e41ca0154e367079ccda371e80e17c8c7cc4d576486fac6a"
+        "version": "e18ac9da2b493b886ea614540411027d0a181dd1499e248a68e0aa9ba77d0324",
+        "signature": "97f7c0ca2e602d7093340c873121bfcf2bd267177c2953598dec0a5e21bf26f0"
       },
       "/users/leiwang/work/go-librarys/src/github.com/u2takey/jupyter-lab-serverless/node_modules/@jupyterlab/application/lib/tokens.d.ts": {
         "version": "e5ded2422cb91f9048cfad46a37f2e51be0081f024a1c032abf63e8be96a1718",
@@ -842,8 +842,8 @@
         "signature": "c03247b9d5b88491ca41870ea156bc8e53b5f8ab2d4b97ec8080cd070ff93f87"
       },
       "/users/leiwang/work/go-librarys/src/github.com/u2takey/jupyter-lab-serverless/src/index.ts": {
-        "version": "0aeccac4245bf0f83ce720601e35d02a3a3f6cd2380dc17d33df5e68b7ac7ad5",
-        "signature": "a0780e5a56fdfebad0a9238ca2fe1a4dad5cad8baca75a8ecbc5723a9a541ac9"
+        "version": "763a926b52dbe627a0e5f8d0ca1d3236a006c5443d1896f985eb2a86bcf10ee1",
+        "signature": "e77b1b5336fc36fd9834e293a3b5b933e6a382dbb605784f4a976b65c9bbef18"
       }
     },
     "options": {

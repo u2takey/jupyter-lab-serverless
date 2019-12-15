@@ -29,8 +29,9 @@ RUN jupyter labextension install \
     @krassowski/jupyterlab_go_to_definition \
     @ryantam626/jupyterlab_code_formatter
 
-RUN date
-RUN pip --no-cache-dir install --upgrade jupyter-lab-serverless
+ARG CACHEBUST=1 
+RUN pip --no-cache-dir install --upgrade jupyter-lab-serverless \
+    requests
 
 EXPOSE 8888
 WORKDIR /opt/app/data

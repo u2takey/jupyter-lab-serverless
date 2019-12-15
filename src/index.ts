@@ -2,10 +2,6 @@ import {
   JupyterFrontEnd, JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 
-// import {
-//   ICommandPalette
-// } from '@jupyterlab/apputils';
-
 import {
   IStateDB, URLExt
 } from '@jupyterlab/coreutils'
@@ -71,19 +67,19 @@ interface Response extends JSONObject{
  */
 function FunctionRequest(
     path: string,
+    method: string,
     settings: ServerConnection.ISettings
 ): Promise<Response> {
   let url = URLExt.join(settings.baseUrl, 'function');
-  let requestInit: RequestInit = {method: 'GET', body: null}
+  let requestInit: RequestInit = {method: method, body: null}
   if (path != null){
-    requestInit.method = 'PUT'
     url = URLExt.join(url, path)
   }
 
   return ServerConnection.makeRequest(url, requestInit, settings).then(response => {
     if (response.status !== 200) {
       return response.text().then(data => {
-        showErrorMessage("Save Function Error", data)
+        showErrorMessage(method+" Function Error", data)
         // throw new ServerConnection.ResponseError(response, data);
       });
     }
@@ -102,7 +98,7 @@ class ButtonExtensionAdd implements DocumentRegistry.IWidgetExtension<NotebookPa
   createNew(panel: NotebookPanel, context: DocumentRegistry.IContext<INotebookModel>): IDisposable {
     let callback = () => {
       const serverSettings = ServerConnection.makeSettings();
-      FunctionRequest(encodeURIComponent(context.path), serverSettings).then((data: any)=>{
+      FunctionRequest(encodeURIComponent(context.path), "PUT", serverSettings).then((data: any)=>{
             showErrorMessage("Save Function Success", '')
             console.log(data)
           }
@@ -127,13 +123,22 @@ class ButtonExtensionAdd implements DocumentRegistry.IWidgetExtension<NotebookPa
  */
 export
 class ButtonExtensionManager implements DocumentRegistry.IWidgetExtension<NotebookPanel, INotebookModel> {
+  delete(name: string){
+    const serverSettings = ServerConnection.makeSettings();
+    FunctionRequest(name, 'DELETE', serverSettings).then((data: any)=>{
+            alert("Delete Function Success")
+            console.log(data)
+          }
+      )
+  }
   createNew(panel: NotebookPanel, context: DocumentRegistry.IContext<INotebookModel>): IDisposable {
     let callback = () => {
       // NotebookActions.runAll(panel.content, context.session);
       const serverSettings = ServerConnection.makeSettings();
-      FunctionRequest(null, serverSettings).then((data: any)=>{
+      FunctionRequest(null, 'GET', serverSettings).then((data: any)=>{
             console.log(data)
-            showDialog(new FunctionDialog(data.data))
+            let a = new FunctionDialog(data.data, this)
+            showDialog(a)
           }
       )
     };

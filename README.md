@@ -31,9 +31,10 @@ jupyter labextension install @u2takey/jupyter-lab-serverless
 For a development install (requires npm version 4 or later), do the following in the repository directory:
 
 ```bash
-npm install
-npm run build
-jupyter labextension link .
+pip install -e .
+jlpm install
+jupyter labextension install . --no-build
+jupyter lab --debug
 ```
 
 To rebuild the package and the JupyterLab app:

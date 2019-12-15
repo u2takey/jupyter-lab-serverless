@@ -7,9 +7,14 @@ import {
 
 export class FunctionTable extends React.Component<any> {
   data: any
-  constructor(data: any){
-    super(data)
+  delegate: any
+  constructor(data: any, delegate: any){
+    super(data, delegate)
     this.data = data
+    this.delegate = delegate
+  }
+  delete(name: string){
+    this.delegate.delete(name)
   }
   getTableBodyAsReactElement(data: any) {
     return (!data) ? null : (
@@ -18,10 +23,11 @@ export class FunctionTable extends React.Component<any> {
           console.log('item: ', item);
           return (
               <tr>
-              <td>{item.name}</td>
-              <td>{item.trigger}</td>
-              <td>{item.success}</td>
-              <td>{item.fail}</td>
+                <td>{item.name}</td>
+                <td>{item.trigger}</td>
+                <td>{item.success}</td>
+                <td>{item.fail}</td>
+                <td><button className={'fa fa-trash'} onClick={() => this.delete(item.name)}></button></td>
               </tr>
               )
         })}
@@ -37,6 +43,7 @@ export class FunctionTable extends React.Component<any> {
             <th>Triggered</th>
             <th>Success</th>
             <th>Fail</th>
+            <th>Delete</th>
           </tr>
           </thead>
           {this.getTableBodyAsReactElement(this.data)}
@@ -54,9 +61,9 @@ export class FunctionDialog implements Dialog.IOptions<React.ReactElement<any>> 
   focusNodeSelector: string;
   renderer: Dialog.IRenderer;
 
-  constructor(data: any) {
+  constructor(data: any, delegate: any) {
     this.title = 'Function List'
-    this.body = new FunctionTable(data).render()
+    this.body = new FunctionTable(data, delegate).render()
   }
 }
 
